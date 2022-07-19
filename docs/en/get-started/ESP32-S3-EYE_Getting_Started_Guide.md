@@ -22,7 +22,7 @@
   - [3.2. Independent Module and Camera Power Supply](#32-independent-module-and-camera-power-supply)
 - [4. Hardware Revision Details](#4-hardware-revision-details)
   - [4.1. Revision History](#41-revision-history)
-  - [4.2. known Issues](#42-known-issues)
+  - [4.2. Known Issues](#42-known-issues)
 - [5. Related Documents](#5-related-documents)
   - [5.1. Datasheet](#51-datasheet)
   - [5.2. Schematic](#52-schematic)
@@ -48,7 +48,7 @@ The ESP32-S3-EYE is a small-sized AI development board produced by [Espressif](h
 
 The document consists of the following major sections:
 
--   [Getting started](#1-getting-started): Introduction of the board, block diagram, description of key components, contents and packaging, as well as quick guide to use the board.
+-   [Getting Started](#1-getting-started): Introduction of the board, block diagram, description of key components, contents and packaging, as well as quick guide to use the board.
 -   [Start Application Development](#2-start-application-development): Hardware and software setup instructions to flash firmware onto the board.
 -   [Hardware Reference](#3-hardware-reference): More detailed information about the board's hardware.
 -   [Hardware Revision Details](#4-hardware-revision-details): Hardware revision history, known issues, and links to user guides for previous versions (if any) of the board.
@@ -71,14 +71,14 @@ The ESP32-S3-EYE has some additional functions comparing to [ESP-EYE](https://gi
 | Flash                   | 8 MB flash       | 4 MB flash         |
 | LCD display               | Yes              | None               |
 | Accelerometer             | Yes              | None               |
-| Alternative power supply  | External battery (optional) | None               |
+| Alternative power supply  | External Li-ion battery (optional) | None               |
 | USB-to-UART bridge        | No need. Functionality is provided by ESP32-S3 USB Serial/JTAG interface. | Yes |
 | Antenna connector        | No need. Antenna is provided by the ESP32-S3-WROOM-1 module. | Yes |
 
 
 ## 1.3. Block Diagram
 
-The block diagram below presents main components of the ESP32-S3-EYE-MB main board (on the left) and the ESP32-S3-EYE-SUB sub board (on the right), as well as the interconnections between components.
+The block diagram below presents main components of the ESP32-S3-EYE-MB (on the left) and the ESP32-S3-EYE-SUB (on the right), as well as the interconnections between components.
 
 <center>
 
@@ -90,7 +90,7 @@ The block diagram below presents main components of the ESP32-S3-EYE-MB main boa
 
 The following sections will describe the key components on the main board and the sub board, respectively.
 
-## 1.4. Components on the ESP32-S3-EYE-MB Main Board
+## 1.4. Components on the ESP32-S3-EYE-MB
 
 <center>
 
@@ -100,24 +100,24 @@ The following sections will describe the key components on the main board and th
 
 </center>
 
-The key components of the board are described from front view to back view, starting from the camera, in an anti-clockwise direction.
+The key components of the board are described from front view to back view, starting from the camera and in an anti-clockwise direction.
 
 | No. | Key Component            |       Description |
 |-----|----|--|
 | 1   | Camera                   | The camera [OV2640](https://github.com/espressif/esp32-camera) with 2 million pixels has a 66.5° field of view and a maximum resolution of 1600x1200. You can change the resolution when developing applications.|
-| 2   | Module Power LED            | The LED (green) turns on when USB power is connected to the board. If it is not turned on, it indicates either the USB power is not supplied, or the 5 V to 3.3 V LDO is broken. Software can configure GPIO3 to set different LED statuses (turned on/off, flashing) for different statuses of the board. Note that GPIO3 must be set up in open-drain mode. Pulling GPIO3 up may burn the LED.  |
+| 2   | Module Power LED            | The LED (green) turns on when USB power is connected to the board. If it is not turned on, it indicates either the USB power is not supplied, or the 5 V to 3.3 V LDO is broken. Software can configure GPIO3 to set different LED statuses (turned on/off, flashing) for different statuses of the board. Note that GPIO3 must be set up in open-drain mode. Otherwise, pulling GPIO3 up may burn the LED.  |
 | 3   | Pin Headers              | Connect the female headers on the sub board.|
 | 4   | 5 V to 3.3 V LDO         | Power regulator that converts a 5 V supply into a 3.3 V output for the module.|
 | 5   | Digital Microphone       | The digital I2S MEMS microphone features 61 dB SNR and –26 dBFS sensitivity, working at 3.3 V.|
-| 6   | FPC Connector            | Connects the main board and the sub board. |
+| 6   | FPC Connector            | Connect the main board and the sub board. |
 | 7   | Function Button          | There are six function buttons on the board. Users can configure any functions as needed except for the RST button. |
 | 8   | ESP32-S3-WROOM-1         | The ESP32-S3-WROOM-1 module embeds the ESP32-S3R8 chip variant that provides Wi-Fi and Bluetooth 5 (LE) connectivity, as well as dedicated vector instructions for accelerating neural network computing and signal processing. On top of the integrated 8 MB Octal SPI PSRAM offered by the SoC, the module also comes with 8 MB flash, allowing for fast data access. ESP32-S3-WROOM-1U module is also supported.|
-| 9   | MicroSD Card Slot        | Used for inserting a MicroSD card to expand memory capacity. |
+| 9   | MicroSD Card Slot        | Used for inserting a MicroSD card to expand memory and backup capacity. |
 | 10  | 3.3 V to 1.5 V LDO       | Power regulator that converts a 3.3 V supply into a 1.5 V output for the camera.|
 | 11  | 3.3 V to 2.8 V LDO       | Power regulator that converts a 3.3 V supply into a 2.8 V output for the camera.|
 | 12  | USB Port           | A Micro-USB port used for 5 V power supply to the board, as well as for communication with the chip via GPIO19 and GPIO20.|
-  13  | Battery Soldering Points | Used for soldering a battery socket to connect an external Li-ion battery that can serve as an alternative power supply to the board. If you use an external battery, make sure it has built-in protection circuit and fuse. The recommended specifications of the battery: capacity > 1000 mAh, output voltage 3.7 V, input voltage 4.2 V – 5 V.|
-| 14  | Battery Charger Chip     | 1 A linear Li-ion battery charger (ME4054BM5G-N) in ThinSOT package. The power source for charging is the **USB Port**.|
+  13  | Battery Soldering Points | Used for soldering a battery socket to connect an external Li-ion battery that can serve as an alternative power supply to the board. If you use an external battery, make sure it has built-in protection circuit and fuse. The recommended specifications of the battery: capacity > 1000 mAh, 3.7 V of output voltage, 4.2 V – 5 V of input voltage.|
+| 14  | Battery Charger Chip     | 1 A linear Li-ion battery charger (ME4054BM5G-N) is packaged in ThinSOT. The power source for charging is the **USB Port**.|
 | 15  | Battery Red LED          | When the USB power is connected to the board and a battery is not connected, the red LED blinks. If a battery is connected and being charged, the red LED turns on. When the battery is fully charged, it turns off.  |
 | 16  | Accelerometer            | Three-axis accelerometer (QMA7981) for screen rotation, etc. |
 
